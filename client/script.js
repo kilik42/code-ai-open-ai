@@ -43,3 +43,33 @@ function generateUniqueId(){
 
   return `${timestamp}-${hexdecimalString}`;
 }
+
+function chatStripe  (isAi, value, uniqueId){
+  return (
+    `
+    <div class="wrapper ${isAi && 'ai'}" id="${uniqueId}">
+      <div class="chat">
+        <div class="profile">
+          <img src="${isAi ? bot : user}" alt="user">
+        </div>
+        <div class="message" id=${uniqueId}> 
+          <p>${value}</p>
+        </div>
+      </div>
+    </div>
+    `
+  )
+}
+
+
+function handleSubmit = async (e) => {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  //generate the user chat stripe
+  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+
+  form.reset();
+
+  const uniqueId = generateUniqueId();
+  
+}
