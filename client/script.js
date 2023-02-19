@@ -61,8 +61,7 @@ function chatStripe  (isAi, value, uniqueId){
   )
 }
 
-
-function handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   const data = new FormData(e.target);
   //generate the user chat stripe
