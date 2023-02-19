@@ -70,6 +70,19 @@ function handleSubmit = async (e) => {
 
   form.reset();
 
+  //generate the ai chat stripe
   const uniqueId = generateUniqueId();
-  
+  chatContainer.innerHTML += chatStripe(true,  " ", uniqueId);
+
+  //scroll to the bottom and put new message in view
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  //get the message from the ai
+  const messageDiv = document.getElementById(uniqueId);
+
+  //loader
+  loader(messageDiv);
+
 }
+
+form.addEventListener('submit', handleSubmit);
