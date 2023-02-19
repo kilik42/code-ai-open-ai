@@ -2,8 +2,8 @@ import bot from './assets/bot.svg';
 import user from './assets/user.svg';
 import send from './assets/send.svg';
 
-const form = document.getElementById('form');
-const chatContainer = document.getElementById('chat-container');
+const form = document.querySelector('form');
+const chatContainer = document.querySelector('#chat_container');
 
 let loadInterval;
 
