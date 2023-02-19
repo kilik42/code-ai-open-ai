@@ -63,7 +63,7 @@ function chatStripe  (isAi, value, uniqueId){
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const data = new FormData(e.target);
+  const data = new FormData(form);
   //generate the user chat stripe
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
 
@@ -81,6 +81,27 @@ const handleSubmit = async (e) => {
 
   //loader
   loader(messageDiv);
+
+  //fetch the message from the ai
+  const response = await fetch('/http://localhost:5000', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({prompt: data.get('prompt')})
+  });
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = '';
+
+  if (response.status === 200){
+    const {bot} = await response.json();
+    const parsedData = data.bot.trim();
+    typeText(messageDiv, bot);
+  }else{
+    const err = await response.text();
+    messageDiv.innerHTML = err;
+    alert(err);
+  }
 
 }
 
